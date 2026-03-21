@@ -8,12 +8,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 app.use(pinoHttp());
 
-// Routes
+
 app.get('/notes', (req, res) => {
   res.status(200).json({ message: 'Retrieved all notes' });
 });
@@ -27,14 +27,14 @@ app.get('/test-error', () => {
   throw new Error('Simulated server error');
 });
 
-// 404 middleware
+
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
-// 500 middleware (error handler)
+
 app.use((err, req, res, next) => {
-  // pino-http додає req.log
+ 
   if (req.log) req.log.error(err);
   res.status(500).json({ message: err.message });
 });
