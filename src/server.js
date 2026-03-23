@@ -10,6 +10,7 @@ import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import notesRouter from './routes/notesRoutes.js';
 import authRouter from './routes/authRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 dotenv.config();
 
@@ -22,14 +23,17 @@ const bootstrap = async () => {
 
   app.use(logger);
   app.use(express.json());
-  app.use(cors({
-    credentials: true,
-    origin: true,
-  }));
+  app.use(
+    cors({
+      credentials: true,
+      origin: true,
+    }),
+  );
   app.use(cookieParser());
 
   app.use(authRouter);
   app.use(notesRouter);
+  app.use(userRouter);
 
   app.use(notFoundHandler);
   app.use(errors());
