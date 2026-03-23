@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { User } from '../models/user.js';
 import { Session } from '../models/session.js';
 import { createSession, setSessionCookies } from '../services/auth.js';
-import { sendMail } from '../utils/sendMail.js';
+import { sendEmail } from '../utils/sendMail.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -146,7 +146,7 @@ export const requestResetEmail = async (req, res) => {
   });
 
   try {
-    await sendMail({
+    await sendEmail({
       to: email,
       subject: 'Reset your password',
       html,

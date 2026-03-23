@@ -19,8 +19,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      default:
-        'https://ac.goit.global/fullstack/react/default-avatar.jpg',
+      default: 'https://ac.goit.global/fullstack/react/default-avatar.jpg',
     },
   },
   {
@@ -30,7 +29,9 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('save', function (next) {
-  this.username = this.email;
+  if (!this.username) {
+    this.username = this.email;
+  }
   next();
 });
 
